@@ -11,10 +11,14 @@ spec:
     targetRevision: 16.0.16
     helm:
       releaseName: rabbitmq
-      values: |
+         values: |
         auth:
           username: admin
           password: admin123
+        image:
+          registry: docker.io
+          repository: bitnami/rabbitmq
+          tag: latest
         metrics:
           enabled: true
           serviceMonitor:
