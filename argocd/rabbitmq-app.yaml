@@ -12,24 +12,27 @@ spec:
     helm:
       releaseName: rabbitmq
       values: |
-        auth:
-          username: admin
-          password: admin123
-        image:
-          registry: docker.io
-          repository: bitnamilegacy/rabbitmq
-          tag: 4.1.3-debian-12-r1
-        metrics:
-          enabled: true
-          serviceMonitor:
-            enabled: true
-            namespace: monitoring
-        service:
-          type: ClusterIP
-        persistence:
-          enabled: true
-          storageClass: gp3-monitoring
-          size: 8Gi
+  global:
+    security:
+      allowInsecureImages: true
+  auth:
+    username: admin
+    password: admin123
+  image:
+    registry: docker.io
+    repository: bitnamilegacy/rabbitmq
+    tag: 4.1.3-debian-12-r1
+  metrics:
+    enabled: true
+    serviceMonitor:
+      enabled: true
+      namespace: monitoring
+  service:
+    type: ClusterIP
+  persistence:
+    enabled: true
+    storageClass: gp3-monitoring
+    size: 8Gi
   destination:
     server: https://kubernetes.default.svc
     namespace: rabbitmq
