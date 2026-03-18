@@ -15,10 +15,6 @@ spec:
         auth:
           username: admin
           password: admin123
-        image:
-          registry: docker.io
-          repository: bitnami/rabbitmq
-          tag: latest
         metrics:
           enabled: true
           serviceMonitor:
