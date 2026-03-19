@@ -1,18 +1,19 @@
 ## EKS-GitOpa
 
-This repository contains Kubernetes manifests managed by ArgoCD to deploy applications into a private EKS cluster.
+This repository contains Kubernetes manifests managed by ArgoCD to deploy applications into a private EKS cluster.It serves as the source of truth for all workloads deployed via GitOps.
 
-It serves as the source of truth for all workloads deployed via GitOps. GitOps repository is used alongside the infrastructure repository:
+## Infrastructure
+This GitOps repository is used alongside the infrastructure repository:
 
 👉 https://github.com/SuheyrM/Production-Grade-Private-EKS-Cluster-with-OpenVPN-Prometheus-Grafana
-
-This project follows a real-world separation of concerns by isolating infrastructure provisioning and application deployment into separate repositories using GitOps principles.
 
 The infrastructure repo provisions:
 - EKS cluster
 - Networking
 - OpenVPN access
 - Monitoring stack
+  
+This project follows a real-world separation of concerns by isolating infrastructure provisioning and application deployment into separate repositories using GitOps principles.
 
 ## Repository Relationship
 ```
