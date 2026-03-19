@@ -2,8 +2,33 @@
 
 This repository contains Kubernetes manifests managed by ArgoCD to deploy applications into a private EKS cluster.
 
-It serves as the source of truth for all workloads deployed via GitOps.
+It serves as the source of truth for all workloads deployed via GitOps. GitOps repository is used alongside the infrastructure repository:
 
+👉 https://github.com/SuheyrM/Production-Grade-Private-EKS-Cluster-with-OpenVPN-Prometheus-Grafana
+
+This project follows a real-world separation of concerns by isolating infrastructure provisioning and application deployment into separate repositories using GitOps principles.
+
+The infrastructure repo provisions:
+- EKS cluster
+- Networking
+- OpenVPN access
+- Monitoring stack
+
+## Repository Relationship
+```
+[ Infrastructure Repo ]
+        ↓
+Terraform provisions EKS + networking
+        ↓
+[ ArgoCD installed in cluster ]
+        ↓
+Pulls from
+        ↓
+[ GitOps Repo (eks-gitops) ]
+        ↓
+Deploys applications into Kubernetes
+
+```
 ## GitOps Workflow
 ```
 GitHub → ArgoCD → Kubernetes Cluster
