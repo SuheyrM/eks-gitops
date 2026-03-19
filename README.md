@@ -15,7 +15,6 @@ The infrastructure repo provisions:
 - OpenVPN access
 - Monitoring stack (Prometheus + Grafana)
 - ArgoCD installation
-- 
 
 ## GitOps Workflow
 ```
