@@ -1,50 +1,37 @@
 ## EKS-GitOpa
 
-This repository contains Kubernetes manifests managed by ArgoCD to deploy applications into a private EKS cluster.It serves as the source of truth for all workloads deployed via GitOps.
+This repository contains Kubernetes manifests and Helm-based deployments managed by ArgoCD for a private Amazon EKS cluster.
+
+It acts as the single source of truth for all application workloads deployed via GitOps.
 
 ## Infrastructure
-This GitOps repository is used alongside the infrastructure repository:
+This repository works alongside the infrastructure layer:
 
 👉 https://github.com/SuheyrM/Production-Grade-Private-EKS-Cluster-with-OpenVPN-Prometheus-Grafana
 
 The infrastructure repo provisions:
-- EKS cluster
-- Networking
+- Amazon EKS cluster (private)
+- VPC and networking
 - OpenVPN access
-- Monitoring stack
-  
-This project follows a real-world separation of concerns by isolating infrastructure provisioning and application deployment into separate repositories using GitOps principles.
+- Monitoring stack (Prometheus + Grafana)
+- ArgoCD installation
+- 
 
-## Repository Relationship
-```
-[ Infrastructure Repo ]
-        ↓
-Terraform provisions EKS + networking
-        ↓
-[ ArgoCD installed in cluster ]
-        ↓
-Pulls from
-        ↓
-[ GitOps Repo (eks-gitops) ]
-        ↓
-Deploys applications into Kubernetes
-
-```
 ## GitOps Workflow
 ```
 GitHub → ArgoCD → Kubernetes Cluster
 ```
-- Changes pushed to this repo
-- ArgoCD detects changes
-- Automatically syncs to cluster
+1. Code is pushed to this repository
+2. ArgoCD detects changes
+3. Applications are automatically synced to the EKS cluster
 
 ## Repository Structure
 
 ```
 apps/
-  demo-nginx/
-  rabbitmq/
-  monitoring/
+  demo-nginx/      # Sample stateless application
+  rabbitmq/        # Stateful message broker (Helm)
+  monitoring/      # Observability stack configs
 ```
 
 ## Applications
@@ -54,25 +41,32 @@ apps/
 - Used to validate ArgoCD setup
 
 # RabbitMQ
-- Stateful message broker
-- Deployed via Helm chart
-- Used for messaging and observability demo
+- Deployed via Bitnami Helm chart
+- Stateful workload with persistent storage
+- Exposes metrics for Prometheus
 
 # Monitoring Stack 
-- Prometheus
-- Grafana
-- Alertmanager
-- kube-prometheus-stack
+- Integrated with kube-prometheus-stack
+- Includes Prometheus, Grafana, Alertmanager
+- Uses ServiceMonitor for scraping metrics
 
 # Deployment Target
-- Private EKS cluster
+- Private EKS cluster (no public access)
 - Access via OpenVPN
-- No public exposure
+- Internal service communication only
 
-# ArgoCD Integration
-- Applications defined in ArgoCD
-- Synced from this repository
-- Enables declarative infrastructure
+# Applications are defined and managed using ArgoCD:
 
+- ArgoCD continuously monitors this repository
+- Automatically syncs changes to the EKS cluster
+- Ensures desired state is always maintained (self-healing)
+
+This enables a fully declarative GitOps workflow where Git is the single source of truth.
+
+# System Architecture
+
+```
+Terraform → EKS Cluster → ArgoCD → GitHub (this repo) → Kubernetes Apps
+```
 # Purpose
-This repository demonstrates GitOps-based application deployment in a production-style Kubernetes environment.
+This repository demonstrates a production-style GitOps workflow by separating infrastructure provisioning from application deployment, enabling automated, declarative Kubernetes operations.
