@@ -5,8 +5,8 @@ This repository contains Kubernetes manifests managed by ArgoCD to deploy applic
 It serves as the source of truth for all workloads deployed via GitOps.
 
 ## GitOps Workflow
-
-```GitHub → ArgoCD → Kubernetes Cluster
+```
+GitHub → ArgoCD → Kubernetes Cluster
 ```
 - Changes pushed to this repo
 - ArgoCD detects changes
