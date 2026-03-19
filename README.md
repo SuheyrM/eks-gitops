@@ -63,10 +63,23 @@ apps/
 
 This enables a fully declarative GitOps workflow where Git is the single source of truth.
 
-# System Architecture
+# 🔗 System Architecture
 
 ```
 Terraform → EKS Cluster → ArgoCD → GitHub (this repo) → Kubernetes Apps
 ```
+# Screenshots 
+<img width="1128" height="888" alt="argocd" src="https://github.com/user-attachments/assets/be245685-5638-425b-9072-483353ffb6a5" />
+<img width="1883" height="902" alt="RabbitMQ png" src="https://github.com/user-attachments/assets/27a3def8-1a49-4b0f-8f18-eea6f0d9e37e" />
+<img width="940" height="460" alt="Grafana -RabbitMQ" src="https://github.com/user-attachments/assets/aef8647e-bc8d-4b8c-8234-08f6885dec5a" />
+
+
 # Purpose
 This repository demonstrates a production-style GitOps workflow by separating infrastructure provisioning from application deployment, enabling automated, declarative Kubernetes operations.
+
+# What This Project Demonstrates
+- Implementation of GitOps principles using ArgoCD  
+- Separation of infrastructure and application layers  
+- Deployment of both stateless and stateful workloads  
+- Observability integration with Prometheus and Grafana  
+- Operating a private Kubernetes cluster with secure access  
